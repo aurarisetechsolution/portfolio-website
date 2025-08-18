@@ -7,26 +7,26 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "aurarise Tech Solutions - Your Technology Guiding Star",
+  title: "aurarise Tech Solutions - Enterprise Technology Powerhouse",
   description:
-    "aurarise Tech Solutions illuminates your path to technological excellence with comprehensive IT solutions tailored for Ethiopian businesses seeking digital transformation.",
+    "aurarise Tech Solutions delivers enterprise-grade technology solutions, digital transformation, and innovative IT services across Ethiopia and beyond.",
   keywords:
-    "technology solutions, IT services, software development, web development, mobile apps, ERP systems, Ethiopia, digital transformation",
+    "enterprise technology solutions, IT consulting, software development, digital transformation, ERP systems, cloud solutions, cybersecurity, Ethiopia, business technology",
   authors: [{ name: "aurarise Tech Solutions" }],
   creator: "aurarise Tech Solutions",
   publisher: "aurarise Tech Solutions",
   openGraph: {
-    title: "aurarise Tech Solutions - Your Technology Guiding Star",
-    description: "Comprehensive IT solutions for Ethiopian businesses seeking digital transformation",
-    url: "https://kekebtech.com",
+    title: "aurarise Tech Solutions - Enterprise Technology Powerhouse",
+    description: "Enterprise-grade technology solutions and digital transformation services for businesses",
+    url: "https://aurarisetechsolutions.com",
     siteName: "aurarise Tech Solutions",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "aurarise Tech Solutions - Your Technology Guiding Star",
-    description: "Comprehensive IT solutions for Ethiopian businesses seeking digital transformation",
+    title: "aurarise Tech Solutions - Enterprise Technology Powerhouse",
+    description: "Enterprise-grade technology solutions and digital transformation services for businesses",
   },
   robots: {
     index: true,

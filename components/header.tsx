@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Star } from "lucide-react"
+import { Menu, X, ChevronDown } from "lucide-react"
 import StarLogo from "./ui/StarLogo"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,75 +23,110 @@ export default function Header() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
       setIsMenuOpen(false)
+      setActiveDropdown(null)
     }
   }
+
+  const navigationItems = [
+    { name: "Home", href: "hero" },
+    { 
+      name: "Services", 
+      href: "services",
+      dropdown: [
+        { name: "Digital Transformation", href: "services" },
+        { name: "Enterprise Software", href: "services" },
+        { name: "Cloud Solutions", href: "services" },
+        { name: "Cybersecurity", href: "services" },
+      ]
+    },
+    { name: "About", href: "about" },
+    { name: "Portfolio", href: "stats" },
+    { name: "Testimonials", href: "testimonials" },
+  ]
 
   return (
     <>
       {/* Main Navigation */}
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-white"
+        className={`sticky top-0 z-50 transition-all duration-500 ${
+          isScrolled 
+            ? "bg-white/95 backdrop-blur-xl shadow-soft border-b border-neutral-200/50" 
+            : "bg-white/80 backdrop-blur-md"
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <StarLogo width={60} height={60} />
-
+            <div className="flex items-center space-x-4">
+              <div className="relative group">
+                <StarLogo width={50} height={50} />
+                <div className="absolute inset-0 bg-primary-500/10 rounded-full blur-xl group-hover:bg-primary-500/20 transition-all duration-300"></div>
               </div>
 
-              <div>
-                <h1 className="text-xl font-bold text-gray-900">aurarise Tech Solutions</h1>
-                <p className="text-xs text-gray-600">Your Technology Guiding Star</p>
+              <div className="hidden sm:block">
+                <h1 className="text-xl font-display font-bold text-neutral-900 tracking-tight">
+                  aurarise Tech Solutions
+                </h1>
+                <p className="text-xs text-neutral-600 font-medium tracking-wide">
+                  Enterprise Tech Powerhouse
+                </p>
               </div>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <button
-                onClick={() => scrollToSection("hero")}
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => scrollToSection("about")}
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("services")}
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                Services
-              </button>
-              <button
-                onClick={() => scrollToSection("stats")}
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                Portfolio
-              </button>
-              <button
-                onClick={() => scrollToSection("testimonials")}
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                Testimonials
-              </button>
+            <nav className="hidden lg:flex items-center space-x-1">
+              {navigationItems.map((item) => (
+                <div key={item.name} className="relative group">
+                  {item.dropdown ? (
+                    <button
+                      onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+                      className="flex items-center space-x-1 px-4 py-2 text-neutral-700 hover:text-primary-600 transition-all duration-300 font-medium rounded-lg hover:bg-primary-50 group"
+                    >
+                      <span>{item.name}</span>
+                      <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => scrollToSection(item.href)}
+                      className="px-4 py-2 text-neutral-700 hover:text-primary-600 transition-all duration-300 font-medium rounded-lg hover:bg-primary-50"
+                    >
+                      {item.name}
+                    </button>
+                  )}
+
+                  {/* Dropdown Menu */}
+                  {item.dropdown && activeDropdown === item.name && (
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-large border border-neutral-200/50 backdrop-blur-xl">
+                      <div className="p-2">
+                        {item.dropdown.map((dropdownItem) => (
+                          <button
+                            key={dropdownItem.name}
+                            onClick={() => scrollToSection(dropdownItem.href)}
+                            className="w-full text-left px-4 py-3 text-neutral-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all duration-200 font-medium"
+                          >
+                            {dropdownItem.name}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
+
+            {/* CTA Button */}
+            <div className="hidden lg:block">
               <Button
                 onClick={() => scrollToSection("contact")}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-6 py-2.5 rounded-xl font-semibold shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105"
               >
-                Contact Us
+                Get Started
               </Button>
-            </nav>
+            </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="lg:hidden p-2 rounded-lg hover:bg-neutral-100 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -99,43 +135,36 @@ export default function Header() {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-gray-200">
-              <nav className="flex flex-col space-y-4">
-                <button
-                  onClick={() => scrollToSection("hero")}
-                  className="text-left text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
-                >
-                  Home
-                </button>
-                <button
-                  onClick={() => scrollToSection("about")}
-                  className="text-left text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
-                >
-                  About
-                </button>
-                <button
-                  onClick={() => scrollToSection("services")}
-                  className="text-left text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
-                >
-                  Services
-                </button>
-                <button
-                  onClick={() => scrollToSection("stats")}
-                  className="text-left text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
-                >
-                  Portfolio
-                </button>
-                <button
-                  onClick={() => scrollToSection("testimonials")}
-                  className="text-left text-gray-700 hover:text-blue-600 transition-colors font-medium py-2"
-                >
-                  Testimonials
-                </button>
+            <div className="lg:hidden py-4 border-t border-neutral-200/50">
+              <nav className="flex flex-col space-y-2">
+                {navigationItems.map((item) => (
+                  <div key={item.name}>
+                    <button
+                      onClick={() => scrollToSection(item.href)}
+                      className="w-full text-left px-4 py-3 text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-colors font-medium rounded-lg"
+                    >
+                      {item.name}
+                    </button>
+                    {item.dropdown && (
+                      <div className="ml-4 mt-2 space-y-1">
+                        {item.dropdown.map((dropdownItem) => (
+                          <button
+                            key={dropdownItem.name}
+                            onClick={() => scrollToSection(dropdownItem.href)}
+                            className="w-full text-left px-4 py-2 text-neutral-600 hover:text-primary-600 hover:bg-primary-50 transition-colors text-sm rounded-lg"
+                          >
+                            {dropdownItem.name}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
                 <Button
                   onClick={() => scrollToSection("contact")}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white w-full mt-4"
+                  className="w-full mt-4 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-3 rounded-xl font-semibold"
                 >
-                  Contact Us
+                  Get Started
                 </Button>
               </nav>
             </div>

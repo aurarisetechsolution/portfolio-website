@@ -31,14 +31,14 @@ const USERS = [
     username: "admin",
     password: "aurarise2024",
     role: "Administrator",
-    email: "admin@kekebtech.com",
+            email: "admin@aurarisetechsolutions.com",
   },
   {
     id: "2",
     username: "manager",
     password: "manager123",
     role: "Content Manager",
-    email: "manager@kekebtech.com",
+            email: "manager@aurarisetechsolutions.com",
   },
 ]
 

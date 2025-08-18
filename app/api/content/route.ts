@@ -118,8 +118,8 @@ const contentStore = {
         "Software Development",
       ],
       experience: "5+ years",
-      email: "amanuel@kekebtech.com",
-      phone: "+251919312559",
+              email: "amanuel@aurarisetechsolutions.com",
+              phone: "+251919312589",
     },
     {
       id: 2,
@@ -129,7 +129,7 @@ const contentStore = {
       bio: "Driving technical innovation and overseeing all technology initiatives at aurarise Tech Solutions. Expert in software development and emerging technologies with a passion for creating scalable solutions that meet modern business needs.",
       expertise: ["Software Development", "Technical Strategy", "Project Management", "Team Coordination"],
       experience: "5+ years",
-      email: "admasu@kekebtech.com",
+              email: "admasu@aurarisetechsolutions.com",
       phone: "+251996168990",
     },
     {
@@ -140,7 +140,7 @@ const contentStore = {
       bio: "Providing strategic business guidance and market insights to drive growth and expansion in the Ethiopian market.",
       expertise: ["Business Strategy", "Market Analysis", "Growth Planning", "Partnership Development"],
       experience: "12+ years",
-      email: "abrham@kekebtech.com",
+              email: "abrham@aurarisetechsolutions.com",
       phone: "+251939447263",
     },
   ],

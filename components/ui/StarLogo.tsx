@@ -2,168 +2,177 @@ import React from "react";
 
 export default function StarLogo({ width = 120, height = 120 }) {
   return (
-    <>
-      <svg
-        width={width}
-        height={height}
-        viewBox="0 0 120 120"
-        className="star-logo"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          {/* Light Mode Gradient */}
-          <radialGradient id="blueGradient" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#bbdefb" />
-            <stop offset="50%" stopColor="#64b5f6" />
-            <stop offset="100%" stopColor="#1976d2" />
-          </radialGradient>
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 520 520" 
+      role="img" 
+      aria-labelledby="title desc"
+      width={width}
+      height={height}
+      className="aurarise-logo"
+    >
+      <title id="title">AURARISE Tech Solution PLC</title>
+      <desc id="desc">Rhino with tech-circuit body inside a crescent, animated glow and circuit motion.</desc>
 
-          {/* Dark Mode Gradient */}
-          <radialGradient id="whiteGradient" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#ffffff" />
-            <stop offset="50%" stopColor="#eeeeee" />
-            <stop offset="100%" stopColor="#cccccc" />
-          </radialGradient>
-
-          {/* Glow Filter */}
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-
-          {/* Mini Star Symbol */}
-          <symbol id="miniStar" viewBox="0 0 24 24">
-            <path
-              d="M12 2L14.6 8.5L22 9.3L16.5 14L18.2 21.5L12 17.8L5.8 21.5L7.5 14L2 9.3L9.4 8.5L12 2Z"
-              className="orbit-star"
-              filter="url(#glow)"
-            />
-          </symbol>
-        </defs>
-
-        {/* Main Star with reduced height */}
-        <path
-          d="M60 30 L68 47 H98 L72 59 L80 77 L60 66 L40 77 L48 59 L22 47 H52 Z"
-          className="main-star"
-        />
-
-        {/* Full Orbiting Stars (larger, closer) */}
-        <use href="#miniStar" className="orbiting-star orbit1" width="10" height="10" />
-        <use href="#miniStar" className="orbiting-star orbit2" width="8" height="8" />
-        <use href="#miniStar" className="orbiting-star orbit3" width="7" height="7" />
-
-        {/* Half Orbiting Stars (larger, closer) */}
-        <use href="#miniStar" className="semi-orbit-star semi1" width="7" height="7" />
-        <use href="#miniStar" className="semi-orbit-star semi2" width="6" height="6" />
-        <use href="#miniStar" className="semi-orbit-star semi3" width="5" height="5" />
-      </svg>
-
-      <style jsx>{`
-        .star-logo {
-          display: block;
-          max-width: 120px;
-        }
-
-        .main-star {
-          fill: url(#blueGradient);
-          stroke: rgba(0, 0, 0, 0.1);
-          stroke-width: 1;
-          filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
-          animation: pulse 3s ease-in-out infinite;
-        }
-
-        .orbit-star {
-          fill: #ffeb3b; /* brighter yellow */
-          filter: drop-shadow(0 0 3px #ffd54f);
-        }
-
-        /* Full Orbit Stars */
-        .orbiting-star {
-          transform-origin: 60px 60px;
-          animation: orbit 6s linear infinite;
-        }
-
-        .orbit1 {
-          transform: rotate(0deg) translate(18px);
-        }
-
-        .orbit2 {
-          transform: rotate(120deg) translate(15px);
-          animation-delay: 1s;
-        }
-
-        .orbit3 {
-          transform: rotate(240deg) translate(12px);
-          animation-delay: 2s;
-        }
-
-        @keyframes orbit {
-          0% {
-            transform: rotate(0deg) translate(18px);
+      {/* =============== THEME (edit these to match any background) =============== */}
+      <style>
+        {`
+          :root{
+            --gold-1:#FFD34D;   /* outer glow */
+            --gold-2:#FFB400;   /* inner gold */
+            --blue-1:#0B1E3A;   /* deep blue */
+            --blue-2:#1F47A4;   /* mid blue */
+            --accent:#56CCF2;   /* circuit glow */
+            --ink:#0E1726;      /* text/strokes on light bg */
           }
-          100% {
-            transform: rotate(360deg) translate(18px);
-          }
-        }
-
-        /* Half Orbit Stars */
-        .semi-orbit-star {
-          transform-origin: 60px 60px;
-          animation: semiOrbit 4s ease-in-out infinite alternate;
-          opacity: 1;
-        }
-
-        .semi1 {
-          transform: rotate(-90deg) translate(15px);
-          animation-delay: 0.5s;
-        }
-
-        .semi2 {
-          transform: rotate(-135deg) translate(14px);
-          animation-delay: 1s;
-        }
-
-        .semi3 {
-          transform: rotate(-180deg) translate(12px);
-          animation-delay: 1.5s;
-        }
-
-        @keyframes semiOrbit {
-          0% {
-            transform: rotate(-90deg) translate(15px);
-          }
-          100% {
-            transform: rotate(90deg) translate(15px);
-          }
-        }
-
-        @keyframes pulse {
-          0%,
-          100% {
-            transform: scale(1);
-            opacity: 1;
-          }
-          50% {
-            transform: scale(1.05);
-            opacity: 0.9;
-          }
-        }
-
-        /* Dark mode */
-        @media (prefers-color-scheme: dark) {
-          .main-star {
-            fill: url(#whiteGradient);
+          /* Light/Dark auto tweak for better contrast */
+          @media (prefers-color-scheme: light){
+            :root{ --ink:#0B1E3A; }
           }
 
-          .orbit-star {
-            fill: #ffffff;
-            filter: drop-shadow(0 0 3px #ffffff);
+          /* --------- Animation keyframes --------- */
+          @keyframes breathe { 0%,100%{opacity:.65} 50%{opacity:1} }
+          @keyframes floaty  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+          @keyframes flow    { to { stroke-dashoffset:-260 } }
+          @keyframes pulse   { 0%,100%{transform:scale(1); opacity:.9} 50%{transform:scale(1.08); opacity:1} }
+          @keyframes shine   { 0%{transform:translateX(-120%)} 100%{transform:translateX(120%)} }
+
+          /* --------- Filters for soft glow --------- */
+          .glow-gold { filter:url(#glowGold); }
+          .glow-blue { filter:url(#glowBlue); }
+
+          /* Motion hooks */
+          .breathe { animation:breathe 3.6s ease-in-out infinite; }
+          .floaty  { animation:floaty 6s ease-in-out infinite; transform-origin:center; }
+          .pulse   { animation:pulse 2.8s ease-in-out infinite; transform-origin:380px 175px; }
+
+          /* Circuit "current" */
+          .circuit-line {
+            stroke: var(--accent);
+            stroke-width:6;
+            fill:none;
+            stroke-linecap:round;
+            stroke-linejoin:round;
+            stroke-dasharray:24 12;
+            animation:flow 2.6s linear infinite;
           }
-        }
-      `}</style>
-    </>
+          .circuit-node { fill: var(--accent); }
+
+          /* Typography */
+          text { font-family: system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; }
+          .brand { font-weight:800; letter-spacing:1.5px; }
+          .sub   { font-weight:600; letter-spacing:4px; }
+
+          /* Optional highlight sweep across the rhino */
+          .sweep {
+            mix-blend-mode:screen;
+            opacity:.35;
+            animation:shine 3.5s ease-in-out infinite;
+          }
+        `}
+      </style>
+
+      {/* =============== DEFINITIONS =============== */}
+      <defs>
+        {/* Gradients */}
+        <linearGradient id="goldGrad" x1="0" x2="1">
+          <stop offset="0%"  stopColor="var(--gold-1)"/>
+          <stop offset="100%" stopColor="var(--gold-2)"/>
+        </linearGradient>
+        <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stopColor="var(--blue-2)"/>
+          <stop offset="100%" stopColor="var(--blue-1)"/>
+        </linearGradient>
+
+        {/* Soft glows */}
+        <filter id="glowGold" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="b1"/>
+          <feMerge><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glowBlue" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="3" result="b2"/>
+          <feMerge><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+
+        {/* Crescent via mask */}
+        <mask id="cut">
+          <rect width="100%" height="100%" fill="white"/>
+          {/* inner circle to cut from outer */}
+          <circle cx="220" cy="250" r="150" fill="black"/>
+        </mask>
+      </defs>
+
+      {/* =============== ICON =============== */}
+      <g className="floaty">
+        {/* Golden crescent */}
+        <g className="breathe glow-gold">
+          <circle cx="270" cy="250" r="190" fill="url(#goldGrad)" opacity=".35"/>
+          <circle cx="270" cy="250" r="190" fill="url(#goldGrad)" mask="url(#cut)"/>
+        </g>
+
+        {/* Rhino head base */}
+        <g id="rhino">
+          {/* head silhouette */}
+          <path className="glow-blue"
+            d="M170,185
+               q55,-32 120,-20
+               q20,-22 25,-22
+               q15,25 46,28
+               q25,-20 45,-45
+               q6,20 -8,45
+               q32,16 43,20
+               q-18,18 -40,31
+               q0,12 -3,26
+               q-3,15 -9,25
+               q-22,35 -66,55
+               q-56,26 -130,8
+               q-74,-18 -94,-74
+               q-8,-22 -4,-45
+               q5,-27 35,-52 z"
+            fill="url(#blueGrad)" stroke="var(--ink)" strokeWidth="0"/>
+
+          {/* horn 1 */}
+          <path className="pulse" d="M365,170
+               q55,-10 80,-55
+               q-6,60 -58,92 z"
+               fill="url(#goldGrad)"/>
+
+          {/* horn 2 (rear) */}
+          <path className="pulse" style={{animationDelay:'.6s'}}
+                d="M330,175
+                   q38,-8 58,-42
+                   q-4,43 -45,66 z"
+                fill="url(#goldGrad)"/>
+
+          {/* eye */}
+          <ellipse cx="320" cy="220" rx="12" ry="8" fill="#0A0A0A" opacity=".85"/>
+
+          {/* circuit network */}
+          <g>
+            <path className="circuit-line"
+              d="M205,205 L235,235 L235,270 L265,300"/>
+            <path className="circuit-line" style={{animationDelay:'.4s'}}
+              d="M260,210 L290,230 L290,260"/>
+            <circle className="circuit-node" cx="205" cy="205" r="7"/>
+            <circle className="circuit-node" cx="235" cy="235" r="7"/>
+            <circle className="circuit-node" cx="235" cy="270" r="7"/>
+            <circle className="circuit-node" cx="265" cy="300" r="7"/>
+            <circle className="circuit-node" cx="260" cy="210" r="7"/>
+            <circle className="circuit-node" cx="290" cy="230" r="7"/>
+            <circle className="circuit-node" cx="290" cy="260" r="7"/>
+          </g>
+
+          {/* highlight sweep */}
+          <rect className="sweep" x="110" y="120" width="320" height="260" rx="160" fill="white"/>
+        </g>
+      </g>
+
+      {/* =============== WORDMARK (optional; hide if you only need the icon) =============== */}
+      <g transform="translate(260,468)" textAnchor="middle">
+        <text className="brand" fontSize="46" fill="currentColor">AURARISE</text>
+        <text className="sub"   fontSize="18" y="26" fill="currentColor" opacity=".85">TECH SOLUTION PLC</text>
+      </g>
+    </svg>
   );
 }
+

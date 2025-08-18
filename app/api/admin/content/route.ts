@@ -39,9 +39,9 @@ let contentData = {
     },
   ],
   contact: {
-    phone: "+251 919 312 559",
-    email: "info@kekebtech.com",
-    supportEmail: "support@kekebtech.com",
+          phone: "+251 919 312 589",
+            email: "info@aurarisetechsolutions.com",
+        supportEmail: "support@aurarisetechsolutions.com",
     address: "Megenagna Shola Traffic Light, High Field Hotel, 3rd Floor",
   },
   stats: {
