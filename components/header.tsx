@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronDown } from "lucide-react"
-import StarLogo from "./ui/StarLogo"
+// ...existing code...
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -59,7 +59,9 @@ export default function Header() {
             {/* Logo */}
             <div className="flex items-center space-x-4">
               <div className="relative group">
-                <StarLogo width={50} height={50} />
+                <div className="w-[60px] h-[60px] flex items-center justify-center">
+                  <img src="/logo_1.jpg" alt="Logo" width={60} height={60} />
+                </div>
                 <div className="absolute inset-0 bg-primary-500/10 rounded-full blur-xl group-hover:bg-primary-500/20 transition-all duration-300"></div>
               </div>
 

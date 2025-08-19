@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Star, Sparkles, Zap, Code, Camera, Smartphone, Settings, Phone, Mail, Play, Shield, Cloud, Database } from "lucide-react"
 import { useContent } from "@/hooks/use-content"
 import LottieAnimation from "./lottie-animation"
-import StarLogo from "./ui/StarLogo" 
+// ...existing code...
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false)
@@ -225,7 +225,7 @@ export default function Hero() {
           >
             <div className="flex items-center justify-center mb-8 flex-wrap">
               <div className="relative mr-4 sm:mr-6">
-                <StarLogo />
+                <img src="/logo_1.jpg" alt="Logo" width={120} height={120} />
                 <div className="absolute inset-0 bg-secondary-400/30 rounded-full blur-2xl animate-pulse-slow"></div>
               </div>
               

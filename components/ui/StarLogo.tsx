@@ -9,7 +9,13 @@ export default function StarLogo({ width = 120, height = 120 }) {
       aria-labelledby="title desc"
       width={width}
       height={height}
-      className="aurarise-logo"
+      className="aurarise-logo inline-block"
+      style={{
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        maxWidth: '100%',
+        height: 'auto'
+      }}
     >
       <title id="title">AURARISE Tech Solution PLC</title>
       <desc id="desc">Rhino with tech-circuit body inside a crescent, animated glow and circuit motion.</desc>
@@ -17,7 +23,14 @@ export default function StarLogo({ width = 120, height = 120 }) {
       {/* =============== THEME (edit these to match any background) =============== */}
       <style>
         {`
-          :root{
+          .aurarise-logo {
+            display: inline-block;
+            vertical-align: middle;
+            max-width: 100%;
+            height: auto;
+          }
+          
+          .aurarise-logo :root{
             --gold-1:#FFD34D;   /* outer glow */
             --gold-2:#FFB400;   /* inner gold */
             --blue-1:#0B1E3A;   /* deep blue */
@@ -25,9 +38,10 @@ export default function StarLogo({ width = 120, height = 120 }) {
             --accent:#56CCF2;   /* circuit glow */
             --ink:#0E1726;      /* text/strokes on light bg */
           }
+          
           /* Light/Dark auto tweak for better contrast */
           @media (prefers-color-scheme: light){
-            :root{ --ink:#0B1E3A; }
+            .aurarise-logo :root{ --ink:#0B1E3A; }
           }
 
           /* --------- Animation keyframes --------- */
@@ -38,16 +52,16 @@ export default function StarLogo({ width = 120, height = 120 }) {
           @keyframes shine   { 0%{transform:translateX(-120%)} 100%{transform:translateX(120%)} }
 
           /* --------- Filters for soft glow --------- */
-          .glow-gold { filter:url(#glowGold); }
-          .glow-blue { filter:url(#glowBlue); }
+          .aurarise-logo .glow-gold { filter:url(#glowGold); }
+          .aurarise-logo .glow-blue { filter:url(#glowBlue); }
 
           /* Motion hooks */
-          .breathe { animation:breathe 3.6s ease-in-out infinite; }
-          .floaty  { animation:floaty 6s ease-in-out infinite; transform-origin:center; }
-          .pulse   { animation:pulse 2.8s ease-in-out infinite; transform-origin:380px 175px; }
+          .aurarise-logo .breathe { animation:breathe 3.6s ease-in-out infinite; }
+          .aurarise-logo .floaty  { animation:floaty 6s ease-in-out infinite; transform-origin:center; }
+          .aurarise-logo .pulse   { animation:pulse 2.8s ease-in-out infinite; transform-origin:380px 175px; }
 
           /* Circuit "current" */
-          .circuit-line {
+          .aurarise-logo .circuit-line {
             stroke: var(--accent);
             stroke-width:6;
             fill:none;
@@ -56,15 +70,15 @@ export default function StarLogo({ width = 120, height = 120 }) {
             stroke-dasharray:24 12;
             animation:flow 2.6s linear infinite;
           }
-          .circuit-node { fill: var(--accent); }
+          .aurarise-logo .circuit-node { fill: var(--accent); }
 
           /* Typography */
-          text { font-family: system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; }
-          .brand { font-weight:800; letter-spacing:1.5px; }
-          .sub   { font-weight:600; letter-spacing:4px; }
+          .aurarise-logo text { font-family: system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; }
+          .aurarise-logo .brand { font-weight:800; letter-spacing:1.5px; }
+          .aurarise-logo .sub   { font-weight:600; letter-spacing:4px; }
 
           /* Optional highlight sweep across the rhino */
-          .sweep {
+          .aurarise-logo .sweep {
             mix-blend-mode:screen;
             opacity:.35;
             animation:shine 3.5s ease-in-out infinite;

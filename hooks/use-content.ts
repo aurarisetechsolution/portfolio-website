@@ -43,18 +43,43 @@ export function useContent() {
   const fetchContent = async () => {
     try {
       setLoading(true)
-      const response = await fetch("/api/content")
+      console.log("Fetching content from /api/content...")
+      const timestamp = Date.now()
+      
+      // Add timeout to prevent infinite loading
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+      
+      const response = await fetch(`/api/content?t=${timestamp}`, {
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        },
+        signal: controller.signal
+      })
+      
+      clearTimeout(timeoutId)
+      console.log("Response status:", response.status)
       const result = await response.json()
+      console.log("Content result:", result)
 
       if (result.success) {
         setContent(result.data)
         setError(null)
+        console.log("Content loaded successfully:", result.data)
       } else {
         setError(result.error || "Failed to fetch content")
+        console.error("Content fetch failed:", result.error)
       }
-    } catch (err) {
-      setError("Network error while fetching content")
-      console.error("Content fetch error:", err)
+    } catch (err: any) {
+      if (err.name === 'AbortError') {
+        setError("Request timeout - using fallback content")
+        console.warn("Content fetch timeout - using fallback")
+      } else {
+        setError("Network error while fetching content")
+        console.error("Content fetch error:", err)
+      }
     } finally {
       setLoading(false)
     }
@@ -130,6 +155,16 @@ export function useContent() {
 
   useEffect(() => {
     fetchContent()
+    
+    // Add retry mechanism if content fails to load
+    const retryTimer = setTimeout(() => {
+      if (!content && !error) {
+        console.log("Retrying content fetch...")
+        fetchContent()
+      }
+    }, 5000)
+    
+    return () => clearTimeout(retryTimer)
   }, [])
 
   return {

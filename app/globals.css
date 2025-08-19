@@ -19,6 +19,22 @@
   }
 }
 
+/* Logo display fixes */
+@layer components {
+  .aurarise-logo {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  .aurarise-logo svg {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
 /* Custom animations for the hero section */
 @keyframes constellation-line {
   0%,

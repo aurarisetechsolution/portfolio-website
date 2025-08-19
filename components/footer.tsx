@@ -1,7 +1,7 @@
 "use client"
 
 import { Star, Phone, Mail, MapPin, Clock, Facebook, Twitter, Linkedin, Instagram, ArrowUp, ArrowRight } from "lucide-react"
-import StarLogo from "./ui/StarLogo"
+// ...existing code...
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -26,7 +26,7 @@ export default function Footer() {
           <div className="space-y-6">
             <div className="flex items-center space-x-4">
               <div className="relative group">
-                <StarLogo width={60} height={60} />
+                <img src="/logo_1.jpg" alt="Logo" width={60} height={60} />
                 <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl group-hover:bg-primary-500/30 transition-all duration-300"></div>
               </div>
               <div>

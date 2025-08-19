@@ -13,6 +13,19 @@ export default function About() {
   // Get content from backend
   const { content, loading, error } = useContent()
 
+  // Fallback content if API fails
+  const fallbackContent = {
+    about: {
+      title: "About aurarise Tech Solutions",
+      description: "Named after the Amharic word for \"rhino,\" aurarise Tech Solutions serves as your technology powerhouse, delivering enterprise-grade solutions that drive digital transformation.",
+      mission: "To empower Ethiopian businesses with cutting-edge technology solutions that drive growth, efficiency, and innovation, while providing exceptional service and support throughout their digital transformation journey.",
+      vision: "To be the leading technology solutions provider in Ethiopia, recognized for our innovation, reliability, and commitment to helping businesses thrive in the digital landscape."
+    }
+  }
+
+  // Use fallback content if API fails
+  const displayContent = content || fallbackContent
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -119,7 +132,7 @@ export default function About() {
     },
   ]
 
-  if (loading) {
+  if (loading && !content) {
     return (
       <section id="about" className="py-20 bg-white flex items-center justify-center">
         <div className="text-center">
@@ -130,11 +143,12 @@ export default function About() {
     )
   }
 
-  if (error || !content) {
+  if (error && !content) {
     return (
       <section id="about" className="py-20 bg-white flex items-center justify-center">
         <div className="text-center">
           <p className="text-xl text-error-600 font-display">Error loading about section: {error}</p>
+          <p className="text-lg text-neutral-500 mt-2">Using fallback content...</p>
         </div>
       </section>
     )
@@ -153,10 +167,12 @@ export default function About() {
                 <Star className="h-8 w-8 text-white" />
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 ml-4">
-                {content.about.title}
+                {content?.about.title || fallbackContent.about.title}
               </h2>
             </div>
-            <p className="text-xl text-neutral-600 max-w-4xl mx-auto leading-relaxed font-medium">{content.about.description}</p>
+            <p className="text-xl text-neutral-600 max-w-4xl mx-auto leading-relaxed font-medium">
+              {content?.about.description || fallbackContent.about.description}
+            </p>
           </div>
 
           {/* Main Content */}
@@ -215,7 +231,9 @@ export default function About() {
                       </div>
                       <h4 className="text-xl font-display font-bold text-neutral-900">Our Mission</h4>
                     </div>
-                    <p className="text-neutral-600 leading-relaxed">{content.about.mission}</p>
+                    <p className="text-neutral-600 leading-relaxed">
+                      {content?.about.mission || fallbackContent.about.mission}
+                    </p>
                   </CardContent>
                 </Card>
 
@@ -230,7 +248,9 @@ export default function About() {
                       </div>
                       <h4 className="text-xl font-display font-bold text-neutral-900">Our Vision</h4>
                     </div>
-                    <p className="text-neutral-600 leading-relaxed">{content.about.vision}</p>
+                    <p className="text-neutral-600 leading-relaxed">
+                      {content?.about.vision || fallbackContent.about.vision}
+                    </p>
                   </CardContent>
                 </Card>
               </div>

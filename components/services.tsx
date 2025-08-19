@@ -14,6 +14,40 @@ export default function Services() {
   // Get content from backend
   const { content, loading, error } = useContent()
 
+  // Fallback content if API fails
+  const fallbackServices = [
+    {
+      id: 1,
+      title: "ERP System Implementation",
+      description: "Comprehensive Enterprise Resource Planning solutions tailored to streamline your business operations and improve efficiency.",
+      features: ["Custom ERP Development", "System Integration", "Data Migration", "Training & Support"],
+      icon: "Settings",
+      color: "from-orange-400 to-red-400",
+      animationType: "erp-system",
+    },
+    {
+      id: 2,
+      title: "Management Systems",
+      description: "Custom CRM, HRMS, and other management systems designed to optimize your business processes and data management.",
+      features: ["CRM Solutions", "HRMS Development", "Inventory Management", "Reporting Systems"],
+      icon: "Database",
+      color: "from-blue-400 to-cyan-400",
+      animationType: "management",
+    },
+    {
+      id: 3,
+      title: "Web Development",
+      description: "Modern, responsive websites and web applications that deliver exceptional user experiences and drive business growth.",
+      features: ["Custom Websites", "E-commerce Platforms", "Web Portals", "Progressive Web Apps"],
+      icon: "Globe",
+      color: "from-green-400 to-emerald-400",
+      animationType: "web-development",
+    }
+  ]
+
+  // Use fallback content if API fails
+  const displayServices = content?.services || fallbackServices
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -97,9 +131,9 @@ export default function Services() {
     },
   ]
 
-  if (loading) {
+  if (loading && !content) {
     return (
-      <section id="services" className="py-20 bg-neutral-50 flex items-center justify-center">
+      <section id="services" className="py-20 bg-gradient-to-br from-primary-50 via-white to-accent-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600 mx-auto mb-4"></div>
           <p className="text-xl text-neutral-600 font-display">Loading services...</p>
@@ -108,11 +142,12 @@ export default function Services() {
     )
   }
 
-  if (error || !content) {
+  if (error && !content) {
     return (
-      <section id="services" className="py-20 bg-neutral-50 flex items-center justify-center">
+      <section id="services" className="py-20 bg-gradient-to-br from-primary-50 via-white to-accent-50 flex items-center justify-center">
         <div className="text-center">
           <p className="text-xl text-error-600 font-display">Error loading services: {error}</p>
+          <p className="text-lg text-neutral-500 mt-2">Using fallback content...</p>
         </div>
       </section>
     )
@@ -170,7 +205,7 @@ export default function Services() {
 
           {/* Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {content.services.map((service, index) => (
+            {displayServices.map((service, index) => (
               <Card
                 key={service.id}
                 className={`group hover:shadow-large transition-all duration-500 hover:scale-105 border-0 shadow-soft cursor-pointer ${

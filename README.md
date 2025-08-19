@@ -1,7 +1,7 @@
 # aurarise Tech Solutions - Enterprise Technology Powerhouse
 
 <div align="center">
-  <img src="public/logo.png" alt="aurarise Tech Solutions Logo" width="200"/>
+  <img src="public/logo_1.png" alt="aurarise Tech Solutions Logo" width="200"/>
   
   ## አራሪዝ • Enterprise Technology Solutions
   
