@@ -42,7 +42,7 @@ let contentData = {
           phone: "+251 919 312 589",
             email: "info@aurarisetechsolutions.com",
         supportEmail: "support@aurarisetechsolutions.com",
-    address: "Megenagna Shola Traffic Light, High Field Hotel, 3rd Floor",
+    address: "Megenagna Shola Traffic Light, Lelmi Merkato Building Office 141, 3rd Floor",
   },
   stats: {
     projects: 30,

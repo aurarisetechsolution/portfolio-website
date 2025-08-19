@@ -103,7 +103,7 @@ export default function Contact() {
     {
       icon: MapPin,
       title: "Our Location",
-      details: ["Megenagna Shola Traffic Light", "High Field Hotel, 3rd Floor"],
+      details: ["Megenagna Shola Traffic Light", "Lelmi Merkato Building Office 141, 3rd Floor"],
       action: handleLocationClick,
       actionText: "View on Map",
       color: "from-primary-500 to-primary-600",
