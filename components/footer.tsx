@@ -173,7 +173,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-neutral-300 text-sm font-medium">Megenagna Shola Traffic Light</p>
-                  <p className="text-neutral-400 text-xs">Lelmi Merkato Building Office 141, 3rd Floor</p>
+                  <p className="text-neutral-400 text-xs">Lemlmi Merkato Building Office 141, 3rd Floor</p>
                 </div>
               </div>
               
